@@ -51,10 +51,10 @@ const validateTodo = (req, res, next) => {
     }
 }
 
-const 
+ 
 
 module.exports = {
     logger,
-    validateUser,
-    validateUserId
+    validateUser
+    
 }
