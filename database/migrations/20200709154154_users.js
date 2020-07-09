@@ -1,5 +1,5 @@
 
-exports.up = function(knex) {
+exports.up = async function(knex) {
   
 
     // ### USERS TABLE ### //
