@@ -1,9 +1,10 @@
 const db = require('../../database/dbConfig');
 
 
-const find = () => {
+const find = (filter) => {
     return db('users')
-    .select('*')
+    .select('id', 'username', 'password')
+    .where(filter)
 }
 
 // const findById = (id) => {
