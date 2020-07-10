@@ -4,7 +4,7 @@ const cors = require('cors');
 
 
 // ROUTES 
-const AuthRoute = require('./Auth/authRoute');
+const authRoute = require('./Auth/authRoute');
 const UserRoute = require('../api/Routes/user-Route.js');
 const TodoRoute = require('../api/Routes/todo-Route');
 
@@ -19,7 +19,7 @@ server.use(cors());
 server.use(express.json());
 
 // ROUTES -> Endpoints
-server.use('/auth/user', AuthRoute);
+server.use('/auth', authRoute);
 server.use('/user', Restricted, UserRoute);
 server.use('/todo', Restricted, TodoRoute);
 

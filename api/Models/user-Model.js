@@ -25,13 +25,10 @@ const find = (filter) => {
 
 // }
 
-const findById = (todoId) => {
-    return db
-    .select('users as u', 'u.user_id', 'u.username', 'u.password', 'u.todo')
-    .from('users')
-    .innerJoin('todo as t', 't.id', 't.user_id')
-    .where({ 't.id': todoId })
-    
+const findById = (id) => {
+    return db('users')
+    .where({ id })
+    .first()
 
 }
 

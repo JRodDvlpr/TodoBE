@@ -8,8 +8,7 @@ exports.up = async function(knex) {
         tbl.increments();
         tbl.string('username', 24).notNullable().unique();
         tbl.string('password').notNullable();
-        tbl.string('email').notNullable();
-        tbl.timestamps(true,true);
+        tbl.timestamp(true,true);
 
     })
 
@@ -29,7 +28,7 @@ exports.up = async function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
 
-        tbl.timestamps(true, true);
+        tbl.timestamp(true, true);
     })
 
     await knex.schema.createTable('tasks', (tbl) => {
@@ -49,7 +48,7 @@ exports.up = async function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
 
-        tbl.timestamps(true, true);
+        tbl.timestamp(true, true);
         
     })
 };
