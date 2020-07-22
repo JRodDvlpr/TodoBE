@@ -19,9 +19,9 @@ server.use(cors());
 server.use(express.json());
 
 // ROUTES -> Endpoints
-server.use('/auth', authRoute);
-server.use('/user', Restricted, UserRoute);
-server.use('/todo', Restricted, TodoRoute);
+server.use('/api/auth', authRoute);
+server.use('/api/user', Restricted, UserRoute);
+server.use('/api/todo', Restricted, TodoRoute);
 
 
 
