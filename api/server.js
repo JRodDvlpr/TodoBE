@@ -1,5 +1,4 @@
 const express = require('express');
-const helmet = require('helmet');
 const cors = require('cors');
 
 
@@ -11,14 +10,11 @@ const TodoRoute = require('../api/Routes/todo-Route');
 // Restricted Middleware
 const Restricted = require('./Middleware/authentication');
 
-
 const server = express();
 
-server.use(helmet());
-server.use(cors());
-server.options('*', cors());
-server.use(express.json());
 
+server.use(cors());
+server.use(express.json());
 
 // ROUTES -> Endpoints
 server.use('/api/auth', authRoute);
