@@ -3,9 +3,8 @@ const db = require('../../database/dbConfig');
 
 const find = () => {
     return db('users as u')
-    .join('todo as t')
     .select('id', 'username', 'password')
-    .where(filter)
+    
 }
 
 // const findById = (id) => {

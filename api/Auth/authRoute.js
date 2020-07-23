@@ -36,7 +36,7 @@ router.post('/login', (req, res) => {
         if ( user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user)
 
-            res.status(200).json({ message: `Welcome to the TodoAppo`, user_id:user.id, username:user.username, token })
+            res.status(200).json({ message: `Welcome to the TodoAppo`, id:user.id, username:user.username, token })
         } else {
             res.status(401).json({ message: 'Invalid Credentials' })
         }
