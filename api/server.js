@@ -16,7 +16,9 @@ const server = express();
 
 server.use(helmet());
 server.use(cors());
+server.options('*', cors());
 server.use(express.json());
+
 
 // ROUTES -> Endpoints
 server.use('/api/auth', authRoute);
