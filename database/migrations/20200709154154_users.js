@@ -8,7 +8,8 @@ exports.up = async function(knex) {
         tbl.increments();
         tbl.string('username', 24).notNullable().unique();
         tbl.string('password').notNullable();
-        tbl.timestamp(true,true);
+        tbl.timestamp('created_at').defaultTo(knex.fn.now())
+        tbl.timestamp('updated_at').defaultTo(knex.fn.now())
 
     })
 
@@ -28,7 +29,8 @@ exports.up = async function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
 
-        tbl.timestamp(true, true);
+        tbl.timestamp('created_at').defaultTo(knex.fn.now())
+        tbl.timestamp('updated_at').defaultTo(knex.fn.now())
     })
 
     await knex.schema.createTable('tasks', (tbl) => {
@@ -48,7 +50,8 @@ exports.up = async function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
 
-        tbl.timestamp(true, true);
+        tbl.timestamp('created_at').defaultTo(knex.fn.now())
+        tbl.timestamp('updated_at').defaultTo(knex.fn.now())
         
     })
 };
