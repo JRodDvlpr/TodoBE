@@ -36,35 +36,17 @@ router.get('/:id',  (req, res) => {
 
 
 // ######### POST Todo ##########
-router.post('/todo', async (req, res) => {
+router.post('/',  (req, res) => {
 
-    const user_id = req.params.id
-    
-    if(!req.body) {
-        next("Missing Todo info");
-    } else {
-        const { name, description, completed    } = req.body;
-        if (!name || !description) {
-            next("Name and description is required.")
-        } else if (!user_id){
-            next("Valid user_id is required") 
-        }else {
-            // Todo validated
-            const task = {
-                name: name,
-                description: description,
-                completed: completed,
-                user_id: user_id
-            } 
-            try {
-                const newTask = await Todo.add(task);
-                res.status(201).json(newTask)
-            } catch (error) {
-                res.status(500).json({ message: error.message})
-            }
-        }
+    const taskData = req.body
 
-    }
+    Todo.add(taskData)
+    .then(add => {
+        res.status(201).json(add)
+    })
+    .catch(error => {
+        res.status(500).json(error.message)
+    })
 })
 
 // ######### UPDATE/PUT individual Todo by ID ##########

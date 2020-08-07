@@ -7,28 +7,25 @@ const find = () => {
     
 }
 
-// const findById = (id) => {
-//     return db('users as u')
-//     .where({ id })
-//     .first()
-//     .then(User => {
-//         return db('todo')
-//         .where({ user_id: id })
-//         .then(todo => {
-//             return {
-//                 User: user,
-//                 todo: todo.map(todo => ({ ...todo }))
-//             }
-//         })
-        
-//     })
-
-// }
-
-const findById = (id) => {
+const findBy = (id) => {
     return db('users')
     .where({ id })
-    .first()
+    
+}
+
+const findById = (id) => {
+    return db('users as u')
+    .where('u.id', id)
+    .join('todo as t', 't.user_id', 'u.id')
+    .select(
+        'u.id as user_id',
+        'u.username',
+        't.id as todo_id',
+        't.name',
+        't.description',
+        't.completed',
+
+    )
 
 }
 
@@ -45,7 +42,7 @@ const update = (changes, id) => {
     .where({ id })
     .update(changes, 'id')
     .then(() => {
-        return findById(id)
+        return findBy(id)
     })
 }
 
@@ -58,6 +55,7 @@ const remove = () => {
 module.exports = {
 
     find,
+    findBy,
     findById,
     add, 
     update,

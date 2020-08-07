@@ -15,7 +15,7 @@ exports.up = async function(knex) {
 
     await knex.schema.createTable('todo', (tbl) => {
         tbl.increments()
-        tbl.string('name', 120).notNullable().unique();
+        tbl.string('name', 120).notNullable()
 
         tbl.string('description').notNullable()
         

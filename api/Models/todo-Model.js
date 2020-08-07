@@ -5,6 +5,11 @@ const find = () => {
     .select('*')
 }
 
+const findBy = (id) => {
+    return db('todo')
+    .where({ id })
+}
+
 const findById = (id) => {
     return db('todo')
     .where({ id })
@@ -24,9 +29,7 @@ const findById = (id) => {
 const add = (todo) => {
     return db('todo')
     .insert(todo, 'id')
-    .then((ids) => {
-        return findById(ids[0])
-    })
+    
 }
 
 const update = (changes, id) => {
