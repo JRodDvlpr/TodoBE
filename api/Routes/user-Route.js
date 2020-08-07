@@ -1,14 +1,21 @@
 const router = require('express').Router();
 
-const db = require('../../database/dbConfig')
+const Users = require('../Models/user-Model');
 
-// HASH PASSWORD
-const bcrypt = require('bcryptjs');
-const { json } = require('express');
+
+
 
 router.get('/', (req, res ) => {
 
-    res.json({ Route: 'Welcome to the Users Route '})
+    Users.find()
+    .then(user => {
+        res.status(200).json(user)
+
+    })
+    .catch(err => {
+        res.status(500).json({ message: " Failed to get Users from the database" })
+    })
+   
 })
 
 module.exports = router;

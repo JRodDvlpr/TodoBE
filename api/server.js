@@ -18,8 +18,8 @@ server.use(express.json());
 
 // ROUTES -> Endpoints
 server.use('/api/auth', authRoute);
-server.use('/api/user', Restricted, UserRoute);
-server.use('/api/tasks', Restricted, TodoRoute);
+server.use('/api/user',  UserRoute);
+server.use('/api/tasks', TodoRoute);
 
 
 
