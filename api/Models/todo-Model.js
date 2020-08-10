@@ -5,10 +5,6 @@ const find = () => {
     .select('*')
 }
 
-const findBy = (id) => {
-    return db('todo')
-    .where({ id })
-}
 
 const findById = (id) => {
     return db('todo')
