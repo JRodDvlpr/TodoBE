@@ -26,8 +26,28 @@ const findById = (id) => {
         't.completed',
 
     )
+   
 
 }
+
+// const findById = (id) => {
+//     return db('operators as o')
+//     .where({ id })
+//     .first()
+//     .then(operator => {
+//         return db
+//         .select('*')
+//         .from('trucks')
+//         .where({ operator_id: id })
+//         .then(truckOwned => {
+//             return {
+//                 operator: operator,
+//                 truckOwned: truckOwned.map(truck => ({...truck}))
+//             }
+//         })
+//     })
+    
+// }
 
 const add = (user) => {
     return db('users')

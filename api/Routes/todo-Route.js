@@ -2,8 +2,6 @@ const router = require('express').Router();
 
 const Todo = require('../Models/todo-Model')
 
-
-
 // // ######### GET ALL Todo ##########
 router.get('/',  (req, res) => {
 
@@ -16,8 +14,6 @@ router.get('/',  (req, res) => {
     })
 
 })
-
-
 
 // ######### GET individual Todo by ID ##########
 router.get('/:id',  (req, res) => {
@@ -36,7 +32,7 @@ router.get('/:id',  (req, res) => {
 
 
 // ######### POST Todo ##########
-router.post('/',  (req, res) => {
+router.post('/add',  (req, res) => {
 
     const taskData = req.body
 
