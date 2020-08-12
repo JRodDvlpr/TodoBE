@@ -94,8 +94,7 @@ _example:_
 ```
 {
 
-  "username": "bob1",
-  "password": "passwerd"
+  "username": "bob1"
 }
 ```
 #### RESPONSE
@@ -105,8 +104,7 @@ _example:_
 ```
 {
   "id": 1,
-  "username": "bob1",
-  "password": "passwerd"
+  "username": "bob1"
 }
 ```
 ### DELETE Operator

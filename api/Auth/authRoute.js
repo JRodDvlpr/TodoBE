@@ -9,23 +9,24 @@ const Users = require('../Models/user-Model');
 
 router.post('/register', (req, res) => {
 
-    const newUser = req.body;
+    const user = req.body;
 
-    const hash = bcrypt.hashSync(newUser.password, 8);
-    newUser.password = hash
+    const hash = bcrypt.hashSync(user.password, 8);
+    user.password = hash
 
     //generates token after registrating
-    const token = generateToken(newUser)
+    const token = generateToken(user)
 
-    Users.add(newUser)
-    .then(saved => {
-        res.status(201).json({ saved: "User has been registered succesfully..", id: saved.id, username: saved.username, token: token})
+    Users.add(user)
+    .then(newUser => {
+        res.status(201).json({ newUser: "User has been registered succesfully..", id: newUser.id, username: newUser.username, token: token})
     })
     .catch(err => {
         res.status(500).json(err.message)
     })
 });
 
+// ### USER REGISTRATION ### 
 
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -36,7 +37,7 @@ router.post('/login', (req, res) => {
         if ( user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user)
 
-            res.status(200).json({ message: `Welcome to the TodoAppo`, id:user.id, username:user.username, token })
+            res.status(200).json({ message: `Welcome to the TodoAppo ${user.username}`, id:user.id, token })
         } else {
             res.status(401).json({ message: 'Invalid Credentials' })
         }
