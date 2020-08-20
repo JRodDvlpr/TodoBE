@@ -3,38 +3,26 @@ const db = require('../../database/dbConfig');
 
 const find = () => {
     return db('users')
-    .select('*')
-    
+      
 }
 
-const findBy = (id) => {
+const findBy = (filter) => {
     return db('users')
-    .where({ id })
+    .where(filter)
     
 }
 
 const findById = (id) => {
-    return db('users as u')
-    .where('u.id', id)
-    .join('todo as t', 't.user_id', 'u.id')
-    .select(
-        'u.id as user_id',
-        'u.username',
-        't.id as todo_id',
-        't.name',
-        't.description',
-        't.completed',
-
-    )
+    return db('users')
+    .where({ id })
+    .first()
+   
 }
-
 
 const add = (user) => {
     return db('users')
     .insert(user, 'id')
-    .then((ids) => {
-        return findById(ids[0])
-    })
+    
 }
 
 const update = (changes, id) => {
