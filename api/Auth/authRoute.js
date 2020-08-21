@@ -47,6 +47,8 @@ router.post('/login', (req, res) => {
 
 module.exports = router;
 
+
+// Login BODY //
 function loginSuccessBody(user) {
 	const token = generateToken(user);
 
