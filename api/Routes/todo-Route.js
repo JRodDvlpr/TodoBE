@@ -32,11 +32,11 @@ router.get('/:id',  (req, res) => {
 
 
 // ######### POST Todo ##########
-router.post('/add',  (req, res) => {
+router.post('/:id/add',  (req, res) => {
+    // user ID 
+    const id = req.params.id;
 
-    const taskData = req.body
-
-    Todo.add(taskData)
+    Todo.add({ user_id: id, ...req.body})
     .then(add => {
         res.status(201).json(add)
     })
