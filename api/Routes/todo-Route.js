@@ -2,10 +2,10 @@ const router = require('express').Router();
 
 const Todo = require('../Models/todo-Model')
 
-// // ######### GET ALL Todo ##########
-router.get('/',  (req, res) => {
+// // ######### GET ALL Todo for USER ##########
+router.get('/:id/tasks',  (req, res) => {
 
-    Todo.find()
+    Todo.findByUser(req.params.id)
     .then(tasks =>{
         res.status(200).json(tasks)
     })
@@ -19,7 +19,7 @@ router.get('/',  (req, res) => {
 router.get('/:id',  (req, res) => {
     const { id } = req.params;
 
-    Todo.findById(id)
+    Todo.findById({ user_id: id })
     .then(task => {
         task ?
         res.status(200).json(task) :

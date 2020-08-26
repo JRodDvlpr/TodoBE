@@ -1,8 +1,8 @@
 const db = require('../../database/dbConfig');
 
-const find = () => {
+const findByUser = (user_id) => {
     return db('todo')
-    .select('*')
+    .where({ user_id: user_id })
 }
 
 
@@ -44,7 +44,7 @@ const remove = (id) => {
 }
 
 module.exports = {
-    find,
+    findByUser,
     findById,
     add,
     update,
