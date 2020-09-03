@@ -2,8 +2,10 @@ const router = require('express').Router();
 
 const Todo = require('../Models/todo-Model')
 
-// // ######### GET ALL Todo for USER ##########
-router.get('/:id/tasks',  (req, res) => {
+const validateUserId = require('../Middleware/validateUserID.js')
+
+// // ######### GET ALL Task for USER ##########
+router.get('/:id/tasks', validateUserId,  (req, res) => {
 
     Todo.findByUser(req.params.id)
     .then(tasks =>{
@@ -15,11 +17,10 @@ router.get('/:id/tasks',  (req, res) => {
 
 })
 
-// ######### GET individual Todo by ID ##########
-router.get('/:id',  (req, res) => {
-    const { id } = req.params;
+// ######### GET individual Task by ID ##########
+router.get('/:id/tasks/:todoId', validateUserId, (req, res) => {
 
-    Todo.findById({ user_id: id })
+    Todo.findById(req.params.todoId)
     .then(task => {
         task ?
         res.status(200).json(task) :
@@ -31,12 +32,12 @@ router.get('/:id',  (req, res) => {
 })
 
 
-// ######### POST Todo ##########
-router.post('/:id/add',  (req, res) => {
+// ######### POST Task ##########
+router.post('/:id/add', validateUserId,  (req, res) => {
     // user ID 
-    const id = req.params.id;
+  
 
-    Todo.add({ user_id: id, ...req.body})
+    Todo.add({ user_id: req.params.id, ...req.body})
     .then(add => {
         res.status(201).json(add)
     })
@@ -45,43 +46,29 @@ router.post('/:id/add',  (req, res) => {
     })
 })
 
-// ######### UPDATE/PUT individual Todo by ID ##########
+// ######### UPDATE/PUT individual Task by ID ##########
 
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
-    const changes = req.body;
+router.put("/:id/tasks/:todoId", validateUserId, (req, res, next) => {
 
-    Todo.findById(id)
-    .then(task => {
-        if (task) {
-            Todo.update(changes, id)
-            .then(updatedTask => {
-                res.json(updatedTask);
-            });
-        } else {
-            res.status(404).json({ message: 'Could Not Find Task With The Given Id' });
-        }
-    })
-    .catch(err => {
-        res.status(500).json({ message: "Failed To Update Task Info."})
-    })
-})
+    Todo.update(req.params.todoId, req.body) 
+      .then(updated => {
+        res.status(200).json(updated);
+      })
+      .catch(err => {
+        next(err);
+        console.log(err);
+      });
+  });
 
-// ######### DELETE individual Todo by ID ##########
+// ######### DELETE individual Task by ID ##########
 
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
+router.delete('/:id/tasks/:todoId', validateUserId, (req, res) => {
+    
+  
 
-    Todo.findById(id)
-    .then(task => {
-        if (!task) {
-            next(`There is no task with the id ${id} to delete `)
-        } else {
-            Todo.remove(id)
-            .then(deleted => {
-                res.json({ message: `Removed ${deleted} from the database ` })
-            })
-        }
+    Todo.remove(req.params.id, req.params.todoId)
+    .then(deleted => {
+        res.json({ message: `Removed ${deleted} from the database ` })
     })
     .catch(err => {
         res.status(500).json({ message: "Could not reach the database. Task was not deleted."})

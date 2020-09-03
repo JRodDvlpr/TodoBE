@@ -10,16 +10,7 @@ const findById = (id) => {
     return db('todo')
     .where({ id })
     .first()
-    // .then(todo => {
-    //     return db('tasks')
-    //     .where({ todo_id:id })
-    //     .then(tasks => {
-    //         return {
-    //             todo: todo,
-    //             tasks: tasks.map(tasks => ({ ...tasks }))
-    //         }
-    //     })
-    // })
+
 }
 
 const add = (todo) => {
@@ -28,13 +19,11 @@ const add = (todo) => {
     
 }
 
-const update = (changes, id) => {
+const update = (id, changes) => {
     return db('todo')
     .where({ id })
-    .update(changes, 'id')
-    .then(() => {
-        return findById(id)
-    })
+    .update(changes)
+    
 }
 
 const remove = (id) => {
