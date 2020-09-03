@@ -1,5 +1,5 @@
 // Model for the users
-const Users = require('../Models/user-Model.js')
+const Users = require('../Models/userModel.js')
 
 
 module.exports = (req, res, next) => {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const Todo = require('../Models/todo-Model')
+const Todo = require('../Models/taskModel')
 
 const validateUserId = require('../Middleware/validateUserID.js')
 
