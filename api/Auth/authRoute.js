@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const generateToken = require('./generate-Token.js');
 
-const Users = require('../Models/user-Model');
+const Users = require('../Models/userModel');
 
 
 // ### USER REGISTRATION ### 
